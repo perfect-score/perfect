@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.error_500}"></title></head>
+  <body>
+   <div id="page" layout:fragment="content">
+      <h1 class="text-center" th:text="#{error_500.heading}">An Error Occurred</h1>
+      <div class="container">
+         <p class="text-center" th:text="#{error_500.error_text}">A system error occurred.</p>
+      </div>
+    </div>
+  </body>
+</html>

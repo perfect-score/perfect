@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.tables}"></title></head>
+  <body>
+   <div id="page" layout:fragment="content">
+      <h1 class="text-center" th:text="#{tables.heading}"></h1>
+      <div class="container">
+
+      <p>Tables wip<p>
+
+      </div>
+    </div>
+  </body>
+
+<script layout:fragment="scripts">
+$(document).ready(function() {
+activeTab('#nav-link-tables');
+$('#about-ticker').vTicker({
+   speed: 500,
+   pause: 15000,
+   showItems: 1,
+   animation: 'fade',
+   mousePause: false,
+   height: 0,
+   direction: 'up'
+   });
+});
+</script>
+
+</html>

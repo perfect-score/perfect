@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.7.RELEASE</version>
+    <relativePath/>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>uk.co.perfectscore</groupId>
+  <artifactId>perfect</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>Perfect Score Parent</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    
+    <perfect.domain.version>1.0.0</perfect.domain.version>
+    <perfect.service.version>1.0.0</perfect.service.version>
+    <perfect.app.version>1.0.0</perfect.app.version>
+
+    <lombok.version>1.18.10</lombok.version>
+    <bootstrap.version>4.5.0</bootstrap.version>
+    <jquery.version>3.5.1</jquery.version>
+    <bootstrap-glyphicons.version>bdd2cbfba0</bootstrap-glyphicons.version>
+    <font-awesome.version>5.13.0</font-awesome.version>
+  </properties>
+
+  <modules>
+    <module>perfect-app</module>
+    <module>perfect-domain</module>
+    <module>perfect-service</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+    
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>${bootstrap.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>jquery</artifactId>
+        <version>${jquery.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>font-awesome</artifactId>
+        <version>${font-awesome.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap-glyphicons</artifactId>
+        <version>${bootstrap-glyphicons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>jquery-toast-plugin</artifactId>
+        <version>1.3.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>uk.co.perfectscore</groupId>
+        <artifactId>perfect-domain</artifactId>
+        <version>${perfect.domain.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>uk.co.perfectscore</groupId>
+        <artifactId>perfect-service</artifactId>
+        <version>${perfect.service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>uk.co.perfectscore</groupId>
+        <artifactId>perfect-app</artifactId>
+        <version>${perfect.app.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+</project>

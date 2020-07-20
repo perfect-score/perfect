@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="header">
+<header>
+  <nav class="navbar navbar-expand-sm bg-transparent">
+
+    <a class="navbar-brand" href="home">
+      <img th:src="@{/images/perfect-logo.png}" width="100%" alt="The Perfect Score Logo">
+    </a>
+
+    <div class="collapse navbar-collapse">
+      <h1 class="text-center"></h1>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+  
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+          <a id="nav-link-home" class="nav-link" href="home"><span th:text="#{nav.link.home}"></span></a>
+        </li>
+        <li class="nav-item">
+          <a id="nav-link-tables" class="nav-link" href="tables"><span th:text="#{nav.link.tables}"></span></a>
+        </li>
+        <li class="nav-item">
+          <a id="nav-link-about" class="nav-link" href="about"><span th:text="#{nav.link.about}"></span></a>
+        </li>
+        <li class="nav-item">
+          <a id="nav-link-contact" class="nav-link" href="contact"><span th:text="#{nav.link.contact}"></span></a>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
+
+</header>
+</div>
+</body>
+</html>

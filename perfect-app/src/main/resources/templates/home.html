@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.home}"></title></head>
+  <body>
+    <div id="page" layout:fragment="content">
+
+      <span hidden="true" id="vf" th:text="${weekNo}" style="display:none;"></span>
+      <span hidden="true" id="growltitle" th:text="#{growl.information.title}" style="display:none;"></span>
+      <span hidden="true" id="growltext" th:text="#{growl.information.text}" style="display:none;"></span>   
+   
+      <h1 class="text-center">Premier League Season 2019-2020</h1>
+      <div class="container-inner">
+
+        <div th:text="#{home.please_select_week}">Select Week</div>
+        <form action="/home" th:object="${homeFormSubmit}" method="POST" onchange="submit();">
+          <div  class="form-group">
+            <select class="form-control custom-select show-tick" th:field="*{weekNo}" id="weekSelect"  onmousedown="if(this.options.length>5){this.size=10;}" onchange="this.blur()" onblur="this.size=0;">
+              <option value="1" th:text="#{home.select_week}">Select Week</option>
+              <option th:each="wk : ${week}" th:value="${wk.id.weekNo}" th:text="${wk.weekName}"></option>
+            </select>
+          </div>
+        </form>
+
+        <form action="#" data-th-action="@{/latestweek}" method="post">
+
+          <div th:if="!${predictionsLoaded}">
+          
+            <button class="btn btn-success" type="submit" name="action">
+              <span th:text="#{home.button_latest_week}"></span>
+            </button>
+
+          </div>
+
+          <div th:if="${predictionsLoaded}">
+            
+            <button class="btn btn-success" type="submit" name="action">
+              <span th:text="#{home.button_latest_week}">Latest Week</span>
+            </button>
+            
+            <a class="btn btn-success" data-toggle="collapse" href="#collapsePredictions" role="button" aria-expanded="false" aria-controls="collapsePredictions">
+              <span th:text="#{home.button_show_predicted_results}">Show Prediction Results</span>
+            </a>
+          
+            <div class="collapse" id="collapsePredictions">
+
+            <div class="card card-body chip">
+
+              <button type="button" class="btn" th:classappend="${card1}">
+                Correct Home Scores
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.homeScores}"></span>
+              </button>            
+
+              <button type="button" class="btn" th:classappend="${card2}">
+                Correct Away Scores
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.awayScores}"></span>
+              </button>
+            
+              <button type="button" class="btn" th:classappend="${card3}">
+                Correct Home Wins
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.homeWins}"></span>
+              </button>
+
+              <button type="button" class="btn" th:classappend="${card4}">
+                Correct Away Wins
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.awayWins}"></span>
+              </button>
+
+              <button type="button" class="btn" th:classappend="${card5}">
+                Correct Draws
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.draws}"></span>
+              </button>
+
+              <button type="button" class="btn" th:classappend="${card6}">
+                Correct Results
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.result}"></span>
+              </button>
+
+              <button type="button" class="btn" th:classappend="${card7}">
+                Perfect Scores
+                <span class="badge badge-light" style="margin-left:5px;" th:text="${predictions.perfectResult}"></span>
+              </button>
+
+            </div>
+          </div>
+        
+        </div>
+
+        </form>
+
+        <div class="container-fluid">
+
+          <table class="table table-striped table-borderless table-hover table-fixed" data-toggle="table" data-sort-stable="true">
+
+            <thead>
+              <tr class="d-flex">
+                <th data-sortable="true" class="col col-sm-2" th:text="#{home.date}"></th>
+                <th class="col col-sm-2" th:text="#{home.home}"></th>
+                <th class="col table-text-center" th:text="#{home.score}"></th>
+                <th class="col col-sm-2" th:text="#{home.away}"></th>
+                <th class="col table-text-center" th:text="#{home.result}"></th>
+                <th class="col table-text-center" th:text="#{home.predict_score}"></th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr th:if="${!loaded}">
+                <td th:text="#{home.no_schedule_available}">No Schedule Available</td>
+              </tr>
+              <tr class="d-flex" th:each="sch : ${schedule}">
+                <td class="col col-sm-2"><span th:text="${sch.gameDate}">Game Date</span></td>
+                <td class="col col-sm-2"><span th:text="${sch.homeTeamShortName}">Home Team Name</span></td>
+                <td class="col table-text-center"><span th:text="${sch.homeTeamScore} + '-' + ${sch.awayTeamScore}"> Score </span></td>
+                <td class="col col-sm-2"><span th:text="${sch.awayTeamShortName}">Away Team Name</span></td>
+                <td class="col table-text-center" th:switch="${sch.result}">
+                  <span th:case="1" th:text="#{home.result_home}">Home</span>
+                  <span th:case="2" th:text="#{home.result_away}">Away</span>
+                  <span th:case="0" th:text="#{home.result_draw}">Draw</span>
+                </td>
+                <td class="col table-text-center">
+                  <span th:if="${sch.homeTeamScorePredict != null}">
+                   
+                    <span class="col table-text-center" th:switch="${sch.resultPrediction}">
+                     
+                      <span th:case="1">
+                        <span th:text="${sch.homeTeamScorePredict} + '-' + ${sch.awayTeamScorePredict}"></span>
+                        <i class="glyphicon glyphicon-star score-predicted-star"></i>
+                      </span>
+
+                      <span th:case="2">
+                        <span th:text="${sch.homeTeamScorePredict} + '-' + ${sch.awayTeamScorePredict}"></span>
+                        <i class="glyphicon glyphicon glyphicon-ok score-predicted-star"></i>
+                      </span>
+
+                      <span th:case="0" th:text="${sch.homeTeamScorePredict} + '-' + ${sch.awayTeamScorePredict}"></span>
+                      
+                      <span th:case="null" th:text="${sch.homeTeamScorePredict} + '-' + ${sch.awayTeamScorePredict}"></span>
+                      
+                    </span>
+
+                  </span>
+                   
+                  <span th:if="${sch.homeTeamScorePredict == null}" th:text="#{home.na}"> Predicted Score </span>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        
+        </div>
+      </div>
+    </div>
+  </body>
+
+<script layout:fragment="scripts">
+$(document).ready(function() {
+selectSelector('weekSelect', $('#vf').text());
+growl(false, $('#growltitle').text(), $('#growltext').text() + " " + $('#vf').text());
+activeTab('#nav-link-home');
+});
+</script>
+
+</html>

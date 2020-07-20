@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.contact}"></title></head>
+<body>
+  <div id="page" layout:fragment="content">
+    <h1 class="text-center" th:text="#{contact.heading}"></h1>
+    <div class="container">
+      
+      <span hidden="false" id="varName" th:text="${name}" style="display:none;"></span>
+      <span hidden="false" id="varEmailAddress" th:text="${emailAddress}" style="display:none;"></span>
+      <span hidden="false" id="varMessage" th:text="${message}" style="display:none;"></span>   
+      
+      <span th:if="${param_success}" hidden="true" id="messagesuccess" th:text="#{growl.true}" style="display:none;"></span>
+      <div class="login-alert-box">
+        <div th:if="${param_error}" class="alert alert-danger" role="alert" th:text="#{contact.message_error}">An error occurred</div>
+        <div th:if="${param_validation_error}" class="alert alert-danger" role="alert" th:text="#{contact.message_validation_error}">Validation errors</div>
+        <div th:if="${param_success}" class="alert alert-success" role="alert" th:text="#{contact.message_sent_success}">Message was sent successfully</div>
+      </div>
+
+      <div class="card card-noborder">
+        <div class="card-body card-body-align"><span th:text="#{contact.enter.message}"></span></div>
+      </div>
+
+      <form th:action="@{/contact}" th:object="${contactMessage}" method="post" novalidate>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" id="name" th:placeholder="#{contact.placeholder_name}" name="name" maxlength="60">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" id="emailAddress" th:placeholder="#{contact.placeholder_emailAddress}" name="emailAddress" maxlength="60">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}">Name Error</small>
+          </div>
+        </div>
+
+        <div class="form-group" style="padding-top: 20px;">
+          <textarea class="form-control" id="message" th:placeholder="#{contact.placeholder_message}" rows="3" name="message" maxlength="4000"></textarea>
+          <small class="form-text text-muted" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Name Error</small>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-block" th:text="#{contact.button.send}">Send Message</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+
+<script layout:fragment="scripts">
+$(document).ready(function() {
+activeTab('#nav-link-contact');
+
+if ($('#messagesuccess').text() == 'true') {
+  growl(false, "Message Sent", "Your message was successfully sent.");
+}
+
+if ($("#varName").text().trim() != "") {
+  setField("#name", $('#varName').text());
+}
+
+if ($("#varEmailAddress").text().trim() != "") {
+  setField("#emailAddress", $('#varEmailAddress').text());
+}
+
+if ($("#varMessage").text().trim() != "") {
+  setField("#message", $('#varMessage').text());
+}
+
+});
+</script>
+
+</html>

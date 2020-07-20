@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.results}"></title></head>
+<body>
+
+<div id="page" layout:fragment="content">
+
+  <h1 class="text-center">Enter Results for Premier League Season 2019-2020</h1>
+
+  <div class="container">
+
+    <table class="table table-striped table-borderless table-hover table-fixed" data-toggle="table" data-sort-stable="true">
+    
+      <thead>
+        <tr>
+          <th hidden="true" style="display:none;"></th>
+          <th hidden="true" style="display:none;"></th>
+          <th hidden="true" style="display:none;"></th>
+          <th th:text="#{home.week_no}"></th>
+          <th th:text="#{home.date}"></th>
+          <th th:text="#{home.home}"></th>
+          <th th:text="#{home.score_home}"></th>
+          <th th:text="v"></th>
+          <th th:text="#{home.score_away}"></th>
+          <th th:text="#{home.away}"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr th:if="${!loaded}">
+          <td th:text="#{home.no_schedule_available}">No Schedule Available</td>
+        </tr>
+        <tr th:each="sch : ${schedule}">
+          <td hidden="true"><span th:text="${sch.id.leagueSeasonId}" style="display:none;"></span></td>
+          <td hidden="true"><span th:text="${sch.id.weekNo}" style="display:none;"></span></td>
+          <td hidden="true"><span th:text="${sch.id.gameNo}" style="display:none;"></span></td>
+          <td><span th:text="${sch.id.weekNo}">Week No</span></td>
+          <td><span th:text="${sch.gameDate}">Game Date</span></td>
+          <td><span th:text="${sch.homeTeamName}">Home Team Name</span></td>
+          <td class="pt-3-half" contenteditable="true" onkeyup="resultPost(this);">
+              
+            <span th:if="${sch.homeTeamScore == ''}" class="active" th:text="${sch.homeTeamScore} ">Home Score</span>
+            <span th:if="${sch.homeTeamScore != ''}" class="p-3 mb-2" th:text="${sch.homeTeamScore}">Home Score</span>
+                
+          </td>
+          <td><span th:text="'v'"> Dash </span></td>
+          <td class="pt-3-half" contenteditable="true" onkeyup="resultPost(this);"><span th:text="${sch.awayTeamScore}">Away Score</span></td>
+          <td><span th:text="${sch.awayTeamName}">Away Team Name</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+</body>
+
+<script layout:fragment="scripts">
+$(document).ready(function() {
+activeTab('#nav-link-results');
+});
+</script>
+
+</html>

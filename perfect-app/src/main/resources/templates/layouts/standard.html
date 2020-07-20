@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head><title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{title.application}"></title> </head>
+<head th:if="${@environment.getProperty('google.analytics')} == 'true'" th:replace="fragments/google :: google"></head>
+<head th:replace="fragments/head :: head"></head>
+<body class="bg">
+  <div th:insert="fragments/header :: header"></div>
+  <div class="container">
+    <main role="main" layout:fragment="content"></main>
+  </div>
+  <div th:replace="fragments/footer :: footer"></div>
+  <div layout:fragment="scripts"></div>
+</body>
+</html>

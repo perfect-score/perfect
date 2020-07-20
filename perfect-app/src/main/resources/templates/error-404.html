@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.error_404}"></title></head>
+  <body>
+   <div id="page" layout:fragment="content">
+      <h1 class="text-center" th:text="#{error_404.heading}">Page Not Found</h1>
+      <div class="container">
+         <p class="text-center" th:text="#{error_404.error_text}">Your page could not be found or does not exist.</p>
+      </div>
+    </div>
+  </body>
+</html>

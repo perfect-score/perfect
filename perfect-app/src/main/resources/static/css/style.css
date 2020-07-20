@@ -1,0 +1,21 @@
+.container { padding: 40px 40px 20px 40px; margin: 60px auto 40px auto; background: linear-gradient(150deg, #FFF 0%, #EEE 100%); color: #000000; }
+.bg { background-image: url("../images/turf.png"); background-repeat: repeat; color: #FFFFFF; }
+
+.active { background: #000000; color: #FFFFFF; }
+
+h1, .footer-copyright { color: #000000; }
+a:hover { text-decoration: none; color: #FFFFFF; background-color: #000000; }
+a { color: inherit; }
+a.navbar-brand { width: 131.5px; height: 43px; padding: 0; margin: 0; }
+
+.pager { color: #aaaaaa; font-size: 11px; margin: 0; text-align: right; }
+
+.card-noborder { border: none; }
+.card-body-align { padding: 1.25rem 0; }
+.container-inner { padding-top: 40px; }
+
+.score-predicted-star { position: absolute; bottom: -4px; top: auto; padding-left: 3px; }
+
+.chip {flex-direction : row}
+
+.table-text-center { text-align: center; }

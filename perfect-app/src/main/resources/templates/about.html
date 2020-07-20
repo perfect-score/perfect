@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/standard}">
+<head><title th:text="#{title.about}"></title></head>
+  <body>
+   <div id="page" layout:fragment="content">
+      <h1 class="text-center" th:text="#{about.heading}"></h1>
+      <div class="container">
+
+        <div id="about-ticker" class="newsticker" style="width:100%;">
+          <ul style="width:100%;">
+            <li>
+              <div class="division-panel">
+                <h3 th:text="#{about.concept_head}">The Concept</h3>
+                <p th:text="#{about.concept_1}"></p>
+              </div>
+              <div class="pager">1/4</div>
+            </li>
+            <li>
+              <div class="division-panel">
+                <h3 th:text="#{about.motivation_head}">The Motivation</h3>
+                <p th:text="#{about.motivation_1}"></p>
+              </div>
+              <div class="pager">2/4</div>
+            </li>
+            <li>
+              <h3 th:text="#{about.problem_head}">The Problem</h3>
+              <div class="division-panel">
+                <p th:text="#{about.problem_1}"></p>
+                <p th:text="#{about.problem_2}"></p>
+              </div>
+              <div class="pager">3/4</div>
+            </li>
+            <li>
+              <h3 th:text="#{about.finally_head}">Finally</h3>
+              <div class="division-panel">
+                <p th:text="#{about.finally_1}"></p>
+              </div>
+              <div class="pager">4/4</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+
+<script layout:fragment="scripts">
+$(document).ready(function() {
+activeTab('#nav-link-about');
+$('#about-ticker').vTicker({
+   speed: 500,
+   pause: 15000,
+   showItems: 1,
+   animation: 'fade',
+   mousePause: false,
+   height: 0,
+   direction: 'up'
+   });
+});
+</script>
+
+</html>
